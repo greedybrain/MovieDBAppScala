@@ -70,14 +70,13 @@ object Scraper {
         genres.addOne(genre)
       } else if (aTag.attr("href").contains("releaseinfo")) {
         val releaseDate = aTag.select("a").text()
-        movie.setReleaseDate_(releaseDate)
+        movie.setReleaseDate(releaseDate)
       }
     })
 
-    println(genres.toArray.mkString("Array(", ", ", ")"))
-    movie.setRuntime_(runtime)
-    movie.setSynopsis_(synopsis)
-    movie.setGeneres_(genres)
+    movie.setRuntime(runtime)
+    movie.setSynopsis(synopsis)
+    movie.setGeneres(genres)
 
     movie
   }

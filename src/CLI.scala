@@ -30,7 +30,10 @@ object CLI {
           if (decision.equals("y")) {
             run()
           }
-          else break
+          else {
+            println("Ok, bye!")
+            break
+          }
         }
       }
     }
