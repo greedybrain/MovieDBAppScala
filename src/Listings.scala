@@ -20,7 +20,7 @@ object Listings {
   def showAll(): Unit = {
     listingHeader()
 
-    var i = 0
+    val i = 0
     for(i <- i until movies.size) {
       val title: String = movies(i).getTitle
       val moreInfoLink: String = movies(i).getMoreInfoLink

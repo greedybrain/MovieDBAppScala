@@ -2,7 +2,6 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
-import scala.collection._
 import scala.collection.mutable.ListBuffer
 
 object Scraper {
@@ -33,7 +32,7 @@ object Scraper {
   }
 
   def getMovies: ListBuffer[Movie] = {
-    var movies: ListBuffer[Movie] = ListBuffer()
+    val movies: ListBuffer[Movie] = ListBuffer()
 
     getMovieListRows.forEach(movie => {
       val title: String = movie.select("a").text()
@@ -57,7 +56,7 @@ object Scraper {
   }
 
   def getMovie(movie: Movie): Movie = {
-    val genres: List[String] = List()
+    val genres: ListBuffer[String] = ListBuffer()
 
     val currentMovie: Document = getSingleMovieHtmlData(movie)
     val runtime: String = currentMovie.select("time").text()
@@ -68,13 +67,14 @@ object Scraper {
     aTags.forEach(aTag => {
       if (aTag.attr("href").contains("genres")) {
         val genre = aTag.select("a").text()
-        genres:+genre
+        genres.addOne(genre)
       } else if (aTag.attr("href").contains("releaseinfo")) {
         val releaseDate = aTag.select("a").text()
         movie.setReleaseDate_(releaseDate)
       }
     })
 
+    println(genres.toArray.mkString("Array(", ", ", ")"))
     movie.setRuntime_(runtime)
     movie.setSynopsis_(synopsis)
     movie.setGeneres_(genres)
